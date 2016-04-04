@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DamgooModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CaracteristicProduit">
+          <Key>
+            <PropertyRef Name="CaracteristicProduitID" />
+          </Key>
+          <Property Name="CaracteristicProduitID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoryProduit">
+          <Key>
+            <PropertyRef Name="CategoryProduitID" />
+          </Key>
+          <Property Name="CategoryProduitID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ColorProduit">
+          <Key>
+            <PropertyRef Name="ColorProduitID" />
+          </Key>
+          <Property Name="ColorProduitID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entrepot">
+          <Key>
+            <PropertyRef Name="entrpotID" />
+          </Key>
+          <Property Name="entrpotID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GenreProduit">
+          <Key>
+            <PropertyRef Name="GenreProduitID" />
+          </Key>
+          <Property Name="GenreProduitID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mouvement">
+          <Key>
+            <PropertyRef Name="mvtID" />
+          </Key>
+          <Property Name="produitID" Type="nvarchar" MaxLength="50" />
+          <Property Name="entrepotID" Type="int" />
+          <Property Name="QteMvt" Type="float" />
+          <Property Name="TypeMvt" Type="bit" />
+          <Property Name="DateMvt" Type="datetime" />
+          <Property Name="QteGlobal" Type="float" />
+          <Property Name="QteGlobalPrix" Type="float" />
+          <Property Name="PrixMvt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="mvtID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NatureProduit">
+          <Key>
+            <PropertyRef Name="NatureProduitID" />
+          </Key>
+          <Property Name="NatureProduitID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="produitID" />
+          </Key>
+          <Property Name="produitID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrixActuel" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="QteGlobal" Type="float" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="NatureID" Type="int" />
+          <Property Name="GenreID" Type="int" />
+          <Property Name="ColorID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="CaracteristicID" Type="int" />
+        </EntityType>
+        <EntityType Name="SupplierProduit">
+          <Key>
+            <PropertyRef Name="SupplierProduitID" />
+          </Key>
+          <Property Name="SupplierProduitID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeProduit">
+          <Key>
+            <PropertyRef Name="TypeProduitID" />
+          </Key>
+          <Property Name="TypeProduitID" Type="int" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Mouvement_Entrepot">
+          <End Role="Entrepot" Type="Self.Entrepot" Multiplicity="0..1" />
+          <End Role="Mouvement" Type="Self.Mouvement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entrepot">
+              <PropertyRef Name="entrpotID" />
+            </Principal>
+            <Dependent Role="Mouvement">
+              <PropertyRef Name="entrepotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mouvement_Produit">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+          <End Role="Mouvement" Type="Self.Mouvement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="produitID" />
+            </Principal>
+            <Dependent Role="Mouvement">
+              <PropertyRef Name="produitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_CaracteristicProduit">
+          <End Role="CaracteristicProduit" Type="Self.CaracteristicProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaracteristicProduit">
+              <PropertyRef Name="CaracteristicProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="CaracteristicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_CategoryProduit">
+          <End Role="CategoryProduit" Type="Self.CategoryProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryProduit">
+              <PropertyRef Name="CategoryProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_ColorProduit">
+          <End Role="ColorProduit" Type="Self.ColorProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorProduit">
+              <PropertyRef Name="ColorProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_GenreProduit">
+          <End Role="GenreProduit" Type="Self.GenreProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenreProduit">
+              <PropertyRef Name="GenreProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_NatureProduit">
+          <End Role="NatureProduit" Type="Self.NatureProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NatureProduit">
+              <PropertyRef Name="NatureProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="NatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_SupplierProduit">
+          <End Role="SupplierProduit" Type="Self.SupplierProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierProduit">
+              <PropertyRef Name="SupplierProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_TypeProduit">
+          <End Role="TypeProduit" Type="Self.TypeProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProduit">
+              <PropertyRef Name="TypeProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DamgooModelStoreContainer">
+          <EntitySet Name="CaracteristicProduit" EntityType="Self.CaracteristicProduit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryProduit" EntityType="Self.CategoryProduit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColorProduit" EntityType="Self.ColorProduit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entrepot" EntityType="Self.Entrepot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GenreProduit" EntityType="Self.GenreProduit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mouvement" EntityType="Self.Mouvement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NatureProduit" EntityType="Self.NatureProduit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierProduit" EntityType="Self.SupplierProduit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeProduit" EntityType="Self.TypeProduit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Mouvement_Entrepot" Association="Self.FK_Mouvement_Entrepot">
+            <End Role="Entrepot" EntitySet="Entrepot" />
+            <End Role="Mouvement" EntitySet="Mouvement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mouvement_Produit" Association="Self.FK_Mouvement_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Mouvement" EntitySet="Mouvement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_CaracteristicProduit" Association="Self.FK_Produit_CaracteristicProduit">
+            <End Role="CaracteristicProduit" EntitySet="CaracteristicProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_CategoryProduit" Association="Self.FK_Produit_CategoryProduit">
+            <End Role="CategoryProduit" EntitySet="CategoryProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_ColorProduit" Association="Self.FK_Produit_ColorProduit">
+            <End Role="ColorProduit" EntitySet="ColorProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_GenreProduit" Association="Self.FK_Produit_GenreProduit">
+            <End Role="GenreProduit" EntitySet="GenreProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_NatureProduit" Association="Self.FK_Produit_NatureProduit">
+            <End Role="NatureProduit" EntitySet="NatureProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_SupplierProduit" Association="Self.FK_Produit_SupplierProduit">
+            <End Role="SupplierProduit" EntitySet="SupplierProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_TypeProduit" Association="Self.FK_Produit_TypeProduit">
+            <End Role="TypeProduit" EntitySet="TypeProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DamgooModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CaracteristicProduit">
+          <Key>
+            <PropertyRef Name="CaracteristicProduitID" />
+          </Key>
+          <Property Name="CaracteristicProduitID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_CaracteristicProduit" FromRole="CaracteristicProduit" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="CategoryProduit">
+          <Key>
+            <PropertyRef Name="CategoryProduitID" />
+          </Key>
+          <Property Name="CategoryProduitID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_CategoryProduit" FromRole="CategoryProduit" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="ColorProduit">
+          <Key>
+            <PropertyRef Name="ColorProduitID" />
+          </Key>
+          <Property Name="ColorProduitID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_ColorProduit" FromRole="ColorProduit" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Entrepot">
+          <Key>
+            <PropertyRef Name="entrpotID" />
+          </Key>
+          <Property Name="entrpotID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Mouvement" Relationship="Self.FK_Mouvement_Entrepot" FromRole="Entrepot" ToRole="Mouvement" />
+        </EntityType>
+        <EntityType Name="GenreProduit">
+          <Key>
+            <PropertyRef Name="GenreProduitID" />
+          </Key>
+          <Property Name="GenreProduitID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_GenreProduit" FromRole="GenreProduit" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Mouvement">
+          <Key>
+            <PropertyRef Name="mvtID" />
+          </Key>
+          <Property Name="produitID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="entrepotID" Type="Int32" />
+          <Property Name="QteMvt" Type="Double" />
+          <Property Name="TypeMvt" Type="Boolean" />
+          <Property Name="DateMvt" Type="DateTime" Precision="3" />
+          <Property Name="QteGlobal" Type="Double" />
+          <Property Name="QteGlobalPrix" Type="Double" />
+          <Property Name="PrixMvt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="mvtID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entrepot" Relationship="Self.FK_Mouvement_Entrepot" FromRole="Mouvement" ToRole="Entrepot" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Mouvement_Produit" FromRole="Mouvement" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="NatureProduit">
+          <Key>
+            <PropertyRef Name="NatureProduitID" />
+          </Key>
+          <Property Name="NatureProduitID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_NatureProduit" FromRole="NatureProduit" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="produitID" />
+          </Key>
+          <Property Name="produitID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrixActuel" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="QteGlobal" Type="Double" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="TypeID" Type="Int32" />
+          <Property Name="NatureID" Type="Int32" />
+          <Property Name="GenreID" Type="Int32" />
+          <Property Name="ColorID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="CaracteristicID" Type="Int32" />
+          <NavigationProperty Name="CaracteristicProduit" Relationship="Self.FK_Produit_CaracteristicProduit" FromRole="Produit" ToRole="CaracteristicProduit" />
+          <NavigationProperty Name="CategoryProduit" Relationship="Self.FK_Produit_CategoryProduit" FromRole="Produit" ToRole="CategoryProduit" />
+          <NavigationProperty Name="ColorProduit" Relationship="Self.FK_Produit_ColorProduit" FromRole="Produit" ToRole="ColorProduit" />
+          <NavigationProperty Name="GenreProduit" Relationship="Self.FK_Produit_GenreProduit" FromRole="Produit" ToRole="GenreProduit" />
+          <NavigationProperty Name="Mouvement" Relationship="Self.FK_Mouvement_Produit" FromRole="Produit" ToRole="Mouvement" />
+          <NavigationProperty Name="NatureProduit" Relationship="Self.FK_Produit_NatureProduit" FromRole="Produit" ToRole="NatureProduit" />
+          <NavigationProperty Name="SupplierProduit" Relationship="Self.FK_Produit_SupplierProduit" FromRole="Produit" ToRole="SupplierProduit" />
+          <NavigationProperty Name="TypeProduit" Relationship="Self.FK_Produit_TypeProduit" FromRole="Produit" ToRole="TypeProduit" />
+        </EntityType>
+        <EntityType Name="SupplierProduit">
+          <Key>
+            <PropertyRef Name="SupplierProduitID" />
+          </Key>
+          <Property Name="SupplierProduitID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_SupplierProduit" FromRole="SupplierProduit" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="TypeProduit">
+          <Key>
+            <PropertyRef Name="TypeProduitID" />
+          </Key>
+          <Property Name="TypeProduitID" Type="Int32" Nullable="false" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_TypeProduit" FromRole="TypeProduit" ToRole="Produit" />
+        </EntityType>
+        <Association Name="FK_Produit_CaracteristicProduit">
+          <End Role="CaracteristicProduit" Type="Self.CaracteristicProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaracteristicProduit">
+              <PropertyRef Name="CaracteristicProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="CaracteristicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_CategoryProduit">
+          <End Role="CategoryProduit" Type="Self.CategoryProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryProduit">
+              <PropertyRef Name="CategoryProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_ColorProduit">
+          <End Role="ColorProduit" Type="Self.ColorProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorProduit">
+              <PropertyRef Name="ColorProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mouvement_Entrepot">
+          <End Role="Entrepot" Type="Self.Entrepot" Multiplicity="0..1" />
+          <End Role="Mouvement" Type="Self.Mouvement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entrepot">
+              <PropertyRef Name="entrpotID" />
+            </Principal>
+            <Dependent Role="Mouvement">
+              <PropertyRef Name="entrepotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_GenreProduit">
+          <End Role="GenreProduit" Type="Self.GenreProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenreProduit">
+              <PropertyRef Name="GenreProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mouvement_Produit">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+          <End Role="Mouvement" Type="Self.Mouvement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="produitID" />
+            </Principal>
+            <Dependent Role="Mouvement">
+              <PropertyRef Name="produitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_NatureProduit">
+          <End Role="NatureProduit" Type="Self.NatureProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NatureProduit">
+              <PropertyRef Name="NatureProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="NatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_SupplierProduit">
+          <End Role="SupplierProduit" Type="Self.SupplierProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierProduit">
+              <PropertyRef Name="SupplierProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_TypeProduit">
+          <End Role="TypeProduit" Type="Self.TypeProduit" Multiplicity="0..1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProduit">
+              <PropertyRef Name="TypeProduitID" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DamgooEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CaracteristicProduit" EntityType="Self.CaracteristicProduit" />
+          <EntitySet Name="CategoryProduit" EntityType="Self.CategoryProduit" />
+          <EntitySet Name="ColorProduit" EntityType="Self.ColorProduit" />
+          <EntitySet Name="Entrepot" EntityType="Self.Entrepot" />
+          <EntitySet Name="GenreProduit" EntityType="Self.GenreProduit" />
+          <EntitySet Name="Mouvement" EntityType="Self.Mouvement" />
+          <EntitySet Name="NatureProduit" EntityType="Self.NatureProduit" />
+          <EntitySet Name="Produit" EntityType="Self.Produit" />
+          <EntitySet Name="SupplierProduit" EntityType="Self.SupplierProduit" />
+          <EntitySet Name="TypeProduit" EntityType="Self.TypeProduit" />
+          <AssociationSet Name="FK_Produit_CaracteristicProduit" Association="Self.FK_Produit_CaracteristicProduit">
+            <End Role="CaracteristicProduit" EntitySet="CaracteristicProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_CategoryProduit" Association="Self.FK_Produit_CategoryProduit">
+            <End Role="CategoryProduit" EntitySet="CategoryProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_ColorProduit" Association="Self.FK_Produit_ColorProduit">
+            <End Role="ColorProduit" EntitySet="ColorProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mouvement_Entrepot" Association="Self.FK_Mouvement_Entrepot">
+            <End Role="Entrepot" EntitySet="Entrepot" />
+            <End Role="Mouvement" EntitySet="Mouvement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_GenreProduit" Association="Self.FK_Produit_GenreProduit">
+            <End Role="GenreProduit" EntitySet="GenreProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mouvement_Produit" Association="Self.FK_Mouvement_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Mouvement" EntitySet="Mouvement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_NatureProduit" Association="Self.FK_Produit_NatureProduit">
+            <End Role="NatureProduit" EntitySet="NatureProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_SupplierProduit" Association="Self.FK_Produit_SupplierProduit">
+            <End Role="SupplierProduit" EntitySet="SupplierProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_TypeProduit" Association="Self.FK_Produit_TypeProduit">
+            <End Role="TypeProduit" EntitySet="TypeProduit" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DamgooModelStoreContainer" CdmEntityContainer="DamgooEntities">
+          <EntitySetMapping Name="CaracteristicProduit">
+            <EntityTypeMapping TypeName="DamgooModel.CaracteristicProduit">
+              <MappingFragment StoreEntitySet="CaracteristicProduit">
+                <ScalarProperty Name="CaracteristicProduitID" ColumnName="CaracteristicProduitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryProduit">
+            <EntityTypeMapping TypeName="DamgooModel.CategoryProduit">
+              <MappingFragment StoreEntitySet="CategoryProduit">
+                <ScalarProperty Name="CategoryProduitID" ColumnName="CategoryProduitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColorProduit">
+            <EntityTypeMapping TypeName="DamgooModel.ColorProduit">
+              <MappingFragment StoreEntitySet="ColorProduit">
+                <ScalarProperty Name="ColorProduitID" ColumnName="ColorProduitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entrepot">
+            <EntityTypeMapping TypeName="DamgooModel.Entrepot">
+              <MappingFragment StoreEntitySet="Entrepot">
+                <ScalarProperty Name="entrpotID" ColumnName="entrpotID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenreProduit">
+            <EntityTypeMapping TypeName="DamgooModel.GenreProduit">
+              <MappingFragment StoreEntitySet="GenreProduit">
+                <ScalarProperty Name="GenreProduitID" ColumnName="GenreProduitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mouvement">
+            <EntityTypeMapping TypeName="DamgooModel.Mouvement">
+              <MappingFragment StoreEntitySet="Mouvement">
+                <ScalarProperty Name="produitID" ColumnName="produitID" />
+                <ScalarProperty Name="entrepotID" ColumnName="entrepotID" />
+                <ScalarProperty Name="QteMvt" ColumnName="QteMvt" />
+                <ScalarProperty Name="TypeMvt" ColumnName="TypeMvt" />
+                <ScalarProperty Name="DateMvt" ColumnName="DateMvt" />
+                <ScalarProperty Name="QteGlobal" ColumnName="QteGlobal" />
+                <ScalarProperty Name="QteGlobalPrix" ColumnName="QteGlobalPrix" />
+                <ScalarProperty Name="PrixMvt" ColumnName="PrixMvt" />
+                <ScalarProperty Name="mvtID" ColumnName="mvtID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NatureProduit">
+            <EntityTypeMapping TypeName="DamgooModel.NatureProduit">
+              <MappingFragment StoreEntitySet="NatureProduit">
+                <ScalarProperty Name="NatureProduitID" ColumnName="NatureProduitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produit">
+            <EntityTypeMapping TypeName="DamgooModel.Produit">
+              <MappingFragment StoreEntitySet="Produit">
+                <ScalarProperty Name="produitID" ColumnName="produitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="PrixActuel" ColumnName="PrixActuel" />
+                <ScalarProperty Name="QteGlobal" ColumnName="QteGlobal" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="NatureID" ColumnName="NatureID" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CaracteristicID" ColumnName="CaracteristicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierProduit">
+            <EntityTypeMapping TypeName="DamgooModel.SupplierProduit">
+              <MappingFragment StoreEntitySet="SupplierProduit">
+                <ScalarProperty Name="SupplierProduitID" ColumnName="SupplierProduitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeProduit">
+            <EntityTypeMapping TypeName="DamgooModel.TypeProduit">
+              <MappingFragment StoreEntitySet="TypeProduit">
+                <ScalarProperty Name="TypeProduitID" ColumnName="TypeProduitID" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
