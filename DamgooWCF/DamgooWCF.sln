@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamgooWCF", "DamgooWCF\DamgooWCF.csproj", "{B40A7D8C-7CB0-43C6-BF88-68CEC62302DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamgooEntities", "DamgooEntities\DamgooEntities.csproj", "{099AFEB4-9740-47C0-973E-95FC9F09F084}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamgooDAL", "DamgooDAL\DamgooDAL.csproj", "{ACC40398-EB07-4351-B3F2-88111ED46FAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamgooRepository", "DamgooRepository\DamgooRepository.csproj", "{CF75C9EA-A52A-4FED-AFBE-2E488C060F86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B40A7D8C-7CB0-43C6-BF88-68CEC62302DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B40A7D8C-7CB0-43C6-BF88-68CEC62302DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B40A7D8C-7CB0-43C6-BF88-68CEC62302DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B40A7D8C-7CB0-43C6-BF88-68CEC62302DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{099AFEB4-9740-47C0-973E-95FC9F09F084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{099AFEB4-9740-47C0-973E-95FC9F09F084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{099AFEB4-9740-47C0-973E-95FC9F09F084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{099AFEB4-9740-47C0-973E-95FC9F09F084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC40398-EB07-4351-B3F2-88111ED46FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC40398-EB07-4351-B3F2-88111ED46FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC40398-EB07-4351-B3F2-88111ED46FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC40398-EB07-4351-B3F2-88111ED46FAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF75C9EA-A52A-4FED-AFBE-2E488C060F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF75C9EA-A52A-4FED-AFBE-2E488C060F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF75C9EA-A52A-4FED-AFBE-2E488C060F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF75C9EA-A52A-4FED-AFBE-2E488C060F86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

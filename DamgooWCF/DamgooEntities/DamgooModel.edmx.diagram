@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d674cf1611d44c6faef236911040159a" Name="Diagram1">
+        <EntityTypeShape EntityType="DamgooModel.CaracteristicProduit" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.CategoryProduit" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.ColorProduit" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.Entrepot" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.GenreProduit" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.Mouvement" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.NatureProduit" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.Produit" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.SupplierProduit" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DamgooModel.TypeProduit" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <AssociationConnector Association="DamgooModel.FK_Produit_CaracteristicProduit" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Produit_CategoryProduit" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Produit_ColorProduit" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Mouvement_Entrepot" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Produit_GenreProduit" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Mouvement_Produit" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Produit_NatureProduit" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Produit_SupplierProduit" ManuallyRouted="false" />
+        <AssociationConnector Association="DamgooModel.FK_Produit_TypeProduit" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
